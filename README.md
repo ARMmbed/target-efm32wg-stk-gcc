@@ -1,1 +1,1 @@
-# target-efm32wg-stk-gcc
+# Yotta Target Description using GCC for the STK3800 for EFM32 Wonder Gecko

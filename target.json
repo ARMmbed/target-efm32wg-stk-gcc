@@ -1,0 +1,52 @@
+{
+  "name": "efm32wg-stk-gcc",
+  "version": "0.0.1",
+  "inherits": {
+    "mbed-gcc": "*"
+  },
+  "description": "GCC target description for the EFM32WG STK3800 Starter Kit.",
+  "licenses": [
+    {
+      "url": "https://spdx.org/licenses/Apache-2.0",
+      "type": "Apache-2.0"
+    }
+  ],
+  "keywords": [
+    "mbed-target:efm32wg",
+    "gcc"
+  ],
+  "similarTo": [
+    "silabs",
+    "efm32",
+    "efm32wg",
+    "efm32wg-stk",
+    "cortex-m4",
+    "armv7-m",
+    "arm",
+    "gcc"
+  ],
+  "config": {
+    },
+  "toolchain": "CMake/toolchain.cmake",
+  "debug-server": [
+    "JLinkGDBServer",
+    "-if",
+    "SWD",
+    "-speed",
+    "4000",
+    "-device",
+    "EFM32WG990F256",
+    "-log",
+    "/tmp/jlink-efm.log"
+  ],
+  "scripts": {
+    "debug": [
+      "valinor",
+      "-t",
+      "uvision",
+      "--target",
+      "efm32wg-stk",
+      "$program"
+    ]
+  }
+}
