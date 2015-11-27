@@ -1,21 +1,25 @@
 {
   "name": "efm32wg-stk-gcc",
   "version": "0.0.1",
-  "inherits": {
-    "mbed-gcc": "*"
-  },
-  "description": "GCC target description for the EFM32WG STK3800 Starter Kit.",
+  "description": "Official mbed build target for the STK3800 Starter Kit for EFM32WG, using the GCC toolchain.",
   "licenses": [
     {
       "url": "https://spdx.org/licenses/Apache-2.0",
       "type": "Apache-2.0"
     }
   ],
+  "inherits": {
+    "mbed-gcc": "~0.1.0"
+  },
   "keywords": [
     "mbed-target:efm32wg",
+    "mbed-official",
+    "efm32wg",
+    "efm32wg-stk",
     "gcc"
   ],
   "similarTo": [
+    "mbed-os",
     "silabs",
     "efm32",
     "efm32wg",
@@ -26,7 +30,99 @@
     "gcc"
   ],
   "config": {
+    "cmsis": {
+      "nvic": {
+        "ram_vector_address": "(&__start_vector_table__)",
+        "flash_vector_address": "0x0",
+        "user_irq_offset": 16,
+        "user_irq_number": 40
+      }
     },
+    "uvisor": {
+      "present": false
+    },
+    "hardware": {
+      "clock": {
+        "core": {
+          "source": "HFXO",
+          "frequency": 48000000
+        },
+        "low-energy": {
+          "source": "LFXO",
+          "frequency": 32768
+        }
+      },
+      "pins": {
+        "LED0": "PE2",
+        "LED1": "PE3",
+        "LED2": "LED0",
+        "LED3": "LED0",
+        "LED4": "LED1",
+        "SW0": "PB9",
+        "SW1": "PB10",
+        "BTN0": "SW0",
+        "BTN1": "SW1",
+        "UART_TX": "PD0",
+        "UART_RX": "PD1",
+        "SERIAL_TX": "PD0",
+        "SERIAL_RX": "PD1",
+        "STDIO_UART_TX": "PE0",
+        "STDIO_UART_RX": "PE1",
+        "USBTX": "PE0",
+        "USBRX": "PE1",
+        "EFM_BC_EN": "PF7",
+        "SLIDER_PAD_0": "PC8",
+        "SLIDER_PAD_1": "PC9",
+        "SLIDER_PAD_2": "PC10",
+        "SLIDER_PAD_3": "PC11"
+      },
+      "test-pins": {
+        "spi": {
+          "MOSI": "PD0",
+          "MISO": "PD1",
+          "SCLK": "PD2",
+          "SSEL": "PD3"
+        },
+        "i2c": {
+          "SDA": "PC4",
+          "SCL": "PC5"
+        }
+      },
+      "lesense": {
+        "port": "gpioPortC",
+        "total-channels": 16
+      },
+      "capsense": {
+        "channels-in-use": 4,
+        "sensitivity": 90
+      }
+    },
+    "modules": {
+      "analogin": {
+        "size": 1
+      },
+      "analogout": {
+        "size": 1
+      },
+      "gpio": {
+        "size": 1
+      },
+      "i2c": {
+        "size": 2
+      },
+      "pwmout": {
+        "size": 1
+      },
+      "serial": {
+        "size": 7,
+        "stdio-uart": "UART0"
+      },
+      "spi": {
+        "size": 3,
+        "transaction-queue-size": 4
+      }
+    }
+  },
   "toolchain": "CMake/toolchain.cmake",
   "debug-server": [
     "JLinkGDBServer",
@@ -46,6 +142,12 @@
       "uvision",
       "--target",
       "efm32wg-stk",
+      "$program"
+    ],
+    "test": [
+      "mbed_test_wrapper",
+      "--target",
+      "EFM32WG_STK3800",
       "$program"
     ]
   }
