@@ -15,7 +15,7 @@ add_definitions("-DEFM32WG990F256 -DEFM32WG -DEFM32")
 
 # append non-generic flags, and set EFM32WG-specific link script
 
-set(_CPU_COMPILATION_OPTIONS "-mcpu=cortex-m4 -mthumb -D__thumb2__ -g -g3 -gdwarf-3 -gstrict-dwarf")
+set(_CPU_COMPILATION_OPTIONS "-mcpu=cortex-m4 -mthumb -D__thumb2__")
 
 set(CMAKE_C_FLAGS_INIT             "${CMAKE_C_FLAGS_INIT} ${_CPU_COMPILATION_OPTIONS}")
 set(CMAKE_ASM_FLAGS_INIT           "${CMAKE_ASM_FLAGS_INIT} ${_CPU_COMPILATION_OPTIONS}")
